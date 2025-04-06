@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/galactic/include/**",
+        "/home/jetson/galactic_ws/src/Simple-2D-LiDAR-Odometry/include/**",
+        "/home/jetson/galactic_ws/src/examples/rclcpp/composition/minimal_composition/include/**",
+        "/home/jetson/galactic_ws/src/examples/rclcpp/executors/cbg_executor/include/**",
+        "/home/jetson/galactic_ws/src/kiki_bot/include/**",
+        "/home/jetson/galactic_ws/src/kiki_da_robot/kiki_control/include/**",
+        "/home/jetson/galactic_ws/src/kiki_da_robot/kiki_description/include/**",
+        "/home/jetson/galactic_ws/src/ros2_control_demos/ros2_control_demo_hardware/include/**",
+        "/home/jetson/galactic_ws/src/ros2_mpu6050_driver/include/**",
+        "/home/jetson/galactic_ws/src/turtlebot3/turtlebot3_node/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-arm64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
