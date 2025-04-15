@@ -58,6 +58,16 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNC
 pluginlib_export_plugin_description_file(hardware_interface kiki_diffdrive.xml)
 
 # INSTALL
+install(
+  TARGETS ${PROJECT_NAME}
+  DESTINATION lib
+)
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+# INSTALL
 # install(
 #   DIRECTORY include/
 #   DESTINATION include/${PROJECT_NAME}/
@@ -68,19 +78,19 @@ pluginlib_export_plugin_description_file(hardware_interface kiki_diffdrive.xml)
 #   DESTINATION share/${PROJECT_NAME}/
 # )
 
-install(TARGETS ${PROJECT_NAME}
-  EXPORT export_${PROJECT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
+# install(TARGETS ${PROJECT_NAME}
+#   EXPORT export_${PROJECT_NAME}
+#   ARCHIVE DESTINATION lib
+#   LIBRARY DESTINATION lib
+#   RUNTIME DESTINATION bin
+# )
 
-install(DIRECTORY config param plugin launch include src DESTINATION share/${PROJECT_NAME}/)
+# install(DIRECTORY config param plugin launch include src DESTINATION share/${PROJECT_NAME}/)
 
-install(FILES
-  kiki_diffdrive.xml
-  DESTINATION share/${PROJECT_NAME}
-)
+# install(FILES
+#   kiki_diffdrive.xml
+#   DESTINATION share/${PROJECT_NAME}
+# )
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
