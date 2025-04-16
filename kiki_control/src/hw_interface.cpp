@@ -169,41 +169,56 @@ hardware_interface::return_type KikiDiffDriveHardware::read()
 hardware_interface::return_type KikiDiffDriveHardware::write()
 {
 
-  if(wheel_l_.cmd > 0 && wheel_r_.cmd > 0)
-  {
-    GPIO::output(RM_IN1, GPIO::HIGH);
-	  GPIO::output(RM_IN2, GPIO::LOW);
+  // if(wheel_l_.cmd > 0 && wheel_r_.cmd > 0)
+  // {
+  //   // std::cout << wheel_l_.cmd << std::endl;
+  //   GPIO::output(RM_IN1, GPIO::HIGH);
+	//   GPIO::output(RM_IN2, GPIO::LOW);
 
-    GPIO::output(LM_IN1, GPIO::HIGH);
-	  GPIO::output(LM_IN2, GPIO::LOW);
-  }
-  else if(wheel_l_.cmd < 0 && wheel_r_.cmd < 0)
-  {
-    GPIO::output(RM_IN1, GPIO::LOW);
-	  GPIO::output(RM_IN2, GPIO::HIGH);
+  //   GPIO::output(LM_IN1, GPIO::HIGH);
+	//   GPIO::output(LM_IN2, GPIO::LOW);
+  // }
+  // else if(wheel_l_.cmd < 0 && wheel_r_.cmd < 0)
+  // {
+  //   GPIO::output(RM_IN1, GPIO::LOW);
+	//   GPIO::output(RM_IN2, GPIO::HIGH);
 
-    GPIO::output(LM_IN1, GPIO::LOW);
-	  GPIO::output(LM_IN2, GPIO::HIGH);
-  }
-  else if(wheel_l_.cmd < 0 && wheel_r_.cmd > 0)
-  {
-    GPIO::output(RM_IN1, GPIO::HIGH);
-	  GPIO::output(RM_IN2, GPIO::LOW);
+  //   GPIO::output(LM_IN1, GPIO::LOW);
+	//   GPIO::output(LM_IN2, GPIO::HIGH);
+  // }
+  // else if(wheel_l_.cmd < 0 && wheel_r_.cmd > 0)
+  // {
+  //   GPIO::output(RM_IN1, GPIO::HIGH);
+	//   GPIO::output(RM_IN2, GPIO::LOW);
 
-    GPIO::output(LM_IN1, GPIO::LOW);
-	  GPIO::output(LM_IN2, GPIO::HIGH);
-  }
-  else if(wheel_l_.cmd > 0 && wheel_r_.cmd < 0)
-  {
-    GPIO::output(RM_IN1, GPIO::LOW);
-	  GPIO::output(RM_IN2, GPIO::HIGH);
+  //   GPIO::output(LM_IN1, GPIO::LOW);
+	//   GPIO::output(LM_IN2, GPIO::HIGH);
+  // }
+  // else if(wheel_l_.cmd > 0 && wheel_r_.cmd < 0)
+  // {
+  //   GPIO::output(RM_IN1, GPIO::LOW);
+	//   GPIO::output(RM_IN2, GPIO::HIGH);
 
-    GPIO::output(LM_IN1, GPIO::HIGH);
-	  GPIO::output(LM_IN2, GPIO::LOW);
-  }
+  //   GPIO::output(LM_IN1, GPIO::HIGH);
+	//   GPIO::output(LM_IN2, GPIO::LOW);
+  // }
 
-  p_rm->start(wheel_r_.calc_pwm());
-  p_lm->start(wheel_l_.calc_pwm());
+  GPIO::output(RM_IN1, wheel_r_.cmd < 0 ? GPIO::HIGH : GPIO::LOW);
+  GPIO::output(RM_IN2, wheel_r_.cmd > 0 ? GPIO::HIGH : GPIO::LOW);
+
+  GPIO::output(LM_IN1, wheel_l_.cmd < 0 ? GPIO::HIGH : GPIO::LOW);
+  GPIO::output(LM_IN2, wheel_l_.cmd > 0 ? GPIO::HIGH : GPIO::LOW);
+
+  int pwm_l = wheel_l_.calc_pwm();
+  int pwm_r = wheel_r_.calc_pwm();
+
+  // std::cout << "AAA wheel_l_.cmd: " << wheel_l_.cmd << std::endl;
+  // std::cout << "AAA wheel_r_.cmd: " << wheel_r_.cmd << std::endl;
+  // std::cout << "AAA pwm_l: " << pwm_l << std::endl;
+  // std::cout << "AAA pwm_r: " << pwm_r << std::endl;
+
+  p_rm->start(pwm_r);
+  p_lm->start(pwm_l);
 
   return hardware_interface::return_type::OK;
 }
