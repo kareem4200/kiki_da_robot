@@ -85,7 +85,7 @@ install(
 #   RUNTIME DESTINATION bin
 # )
 
-# install(DIRECTORY config param plugin launch include src DESTINATION share/${PROJECT_NAME}/)
+install(DIRECTORY config param plugin launch include src DESTINATION share/${PROJECT_NAME}/)
 
 # install(FILES
 #   kiki_diffdrive.xml
