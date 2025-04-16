@@ -1,5 +1,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kiki_robot">
 
+  <xacro:macro name="kiki_desc_urdf" params="prefix">
+
   <link name="base_footprint"/>
 
   <joint name="base_joint" type="fixed">
@@ -155,5 +157,7 @@
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
     </inertial> -->
   </link>
+
+  </xacro:macro>
 
 </robot>
