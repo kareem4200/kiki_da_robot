@@ -49,43 +49,6 @@ namespace kiki_diffdrive
 class KikiDiffDriveHardware : public hardware_interface::SystemInterface
 {
 
-struct Config
-{
-  std::string left_wheel_name = "";
-  std::string right_wheel_name = "";
-//   float loop_rate = 0.0;
-//   std::string device = "";
-//   int baud_rate = 0;
-//   int timeout_ms = 0;
-//   int enc_counts_per_rev = 0;
-  // int pid_p = 0;
-  // int pid_d = 0;
-  // int pid_i = 0;
-  // int pid_o = 0;
-};
-
-// const int RM_IN1 = 6; //ON BOARD 31
-// const int RM_IN2 = 22; //ON BOARD 15
-// const int RM_PWM = 13; // ON BOARD 33
-
-// const int LM_IN1 = 23; // ON BOARD 16
-// const int LM_IN2 = 18; // ON BOARD 12 
-// const int LM_PWM = 12; // ON BOARD 32
-
-// GPIO::setmode(GPIO::BCM);
-
-// GPIO::setup(RM_IN1, GPIO::OUT, GPIO::LOW);
-// GPIO::setup(RM_IN2, GPIO::OUT, GPIO::LOW);
-
-// GPIO::setup(LM_IN1, GPIO::OUT, GPIO::LOW);
-// GPIO::setup(LM_IN2, GPIO::OUT, GPIO::LOW);
-
-// GPIO::setup(RM_PWM, GPIO::OUT, GPIO::LOW);
-// GPIO::setup(LM_PWM, GPIO::OUT, GPIO::LOW);
-
-// GPIO::PWM p_rm(RM_PWM, 50);
-// GPIO::PWM p_lm(LM_PWM, 50);
-
 
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KikiDiffDriveHardware);
@@ -119,34 +82,14 @@ public:
 
 private:
 
-  // Config cfg_;
   Wheel wheel_l_;
   Wheel wheel_r_;
 
-  // const int RM_IN1 = 6; //ON BOARD 31
-  // const int RM_IN2 = 22; //ON BOARD 15
-  // const int RM_PWM = 13; // ON BOARD 33
-
-  // const int LM_IN1 = 23; // ON BOARD 16
-  // const int LM_IN2 = 18; // ON BOARD 12 
-  // const int LM_PWM = 12; // ON BOARD 32
-
-  // GPIO::setmode(GPIO::BCM);
-
-  // GPIO::setup(RM_IN1, GPIO::OUT, GPIO::LOW);
-  // GPIO::setup(RM_IN2, GPIO::OUT, GPIO::LOW);
-
-  // GPIO::setup(LM_IN1, GPIO::OUT, GPIO::LOW);
-  // GPIO::setup(LM_IN2, GPIO::OUT, GPIO::LOW);
-
-  // GPIO::setup(RM_PWM, GPIO::OUT, GPIO::LOW);
-  // GPIO::setup(LM_PWM, GPIO::OUT, GPIO::LOW);
-
-  // GPIO::PWM p_rm(RM_PWM, 50);
-  // GPIO::PWM p_lm(LM_PWM, 50);
+  std::unique_ptr<GPIO::PWM> p_rm;
+  std::unique_ptr<GPIO::PWM> p_lm;
 
 };
 
-}  // namespace diffdrive_arduino
+}  // namespace kiki_diffdrive
 
 #endif  // KIKI_DIFFDRIVE_HPP__DIFFBOT_SYSTEM_HPP_
