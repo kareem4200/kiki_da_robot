@@ -8,11 +8,10 @@
   <xacro:include filename="$(find kiki_description)/urdf/kiki_description.urdf.xacro" />
 
   <!-- Import diffbot ros2_control description -->
-  <!-- <xacro:include filename="$(find diffdrive_arduino)/ros2_control/diffbot.ros2_control.xacro" /> -->
+  <xacro:include filename="$(find kiki_control)/plugin/kikibot.ros2_control.xacro" />
 
-  <!-- <xacro:kiki prefix="$(arg prefix)" /> -->
+  <xacro:kiki_desc_urdf prefix="$(arg prefix)" />
 
-  <!-- <xacro:diffbot_ros2_control
-    name="DiffBot" prefix="$(arg prefix)" /> -->
+  <xacro:kiki_ros2_control name="" prefix="$(arg prefix)" />
 
 </robot>
