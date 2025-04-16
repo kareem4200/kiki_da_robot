@@ -1,9 +1,9 @@
-#ifndef DIFFDRIVE_ARDUINO_WHEEL_HPP
-#define DIFFDRIVE_ARDUINO_WHEEL_HPP
+#ifndef DIFFDRIVE_WHEEL_HPP
+#define DIFFDRIVE_WHEEL_HPP
 
 #include <string>
 #include <cmath>
-
+#include <iostream>
 
 class Wheel
 {
@@ -19,9 +19,9 @@ class Wheel
     const int cmd_max = 17;
     int cmd_temp;
 
-    const int pwm_min = 0;
+    const int pwm_min = 40;
     const int pwm_max = 255;
-    int pwm;
+    int pwm = 0;
 
     Wheel() = default;
 
@@ -39,8 +39,9 @@ class Wheel
     int calc_pwm()
     {
 
-      cmd_temp = (abs(cmd) < cmd_min) ? cmd_min : abs(cmd);
-      cmd_temp = (abs(cmd) > cmd_max) ? cmd_max : abs(cmd);
+    cmd_temp = (abs(cmd) < cmd_min) ? cmd_min : abs(cmd);
+    cmd_temp = (abs(cmd) > cmd_max) ? cmd_max : abs(cmd);
+    // std::cout << "cmd: " << cmd << std::endl;
 
     // Calculate the output using linear interpolation
     pwm = static_cast<int>(
@@ -48,12 +49,12 @@ class Wheel
         (pwm_max - pwm_min) + pwm_min
     );
 
-    return (pwm / pwm_max) * 100;
+    // std::cout << "pwm: " << pwm << std::endl;
+
+    return (pwm * 100 / pwm_max);
     }
-
-
 
 };
 
 
-#endif // DIFFDRIVE_ARDUINO_WHEEL_HPP
+#endif // DIFFDRIVE_WHEEL_HPP
