@@ -40,7 +40,7 @@ ament_target_dependencies(
   rclcpp_lifecycle
 )
 
-# target_link_libraries(${PROJECT_NAME} PRIVATE JetsonGPIO)
+target_link_libraries(${PROJECT_NAME} JetsonGPIO)
 
 # target_include_directories(${PROJECT_NAME} PUBLIC
 # $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
