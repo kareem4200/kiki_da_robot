@@ -2,16 +2,16 @@ controller_manager:
   ros__parameters:
     update_rate: 10  # Hz
 
- #   joint_state_broadcaster:
-  #    type: joint_state_broadcaster/JointStateBroadcaster
+    joint_state_broadcaster:
+     type: joint_state_broadcaster/JointStateBroadcaster
 
     diffbot_base_controller:
       type: diff_drive_controller/DiffDriveController
 
 diffbot_base_controller:
   ros__parameters:
-    left_wheel_names: ["left_wheel_joint"]
-    right_wheel_names: ["right_wheel_joint"]
+    left_wheel_names: ["wheel_left_joint"]
+    right_wheel_names: ["wheel_right_joint"]
 
     wheel_separation: 0.12
     #wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -23,12 +23,12 @@ diffbot_base_controller:
 
     publish_rate: 50.0
     # odom_frame_id: odom
-    base_frame_id: base_link
+    base_frame_id: base_footprint
     pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
 
     open_loop: true
-    enable_odom_tf: false
+    enable_odom_tf: true
 
     cmd_vel_timeout: 0.5
     #publish_limited_velocity: true
