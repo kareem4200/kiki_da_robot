@@ -9,6 +9,9 @@ class Wheel
 {
     public:
 
+    double pos = 1.0;
+    double vel = 0.0;
+
     std::string name = "";
     double cmd = 0;
 
