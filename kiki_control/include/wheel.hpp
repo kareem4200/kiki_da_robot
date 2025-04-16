@@ -9,7 +9,7 @@ class Wheel
 {
     public:
 
-    double pos = 1.0;
+    double pos = 0.0;
     double vel = 0.0;
 
     std::string name = "";
@@ -30,7 +30,6 @@ class Wheel
       setup(wheel_name);
     }
 
-    
     void setup(const std::string &wheel_name)
     {
       name = wheel_name;
