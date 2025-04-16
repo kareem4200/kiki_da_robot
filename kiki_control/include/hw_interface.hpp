@@ -35,12 +35,14 @@
 
 #include "wheel.hpp"
 
-#define RM_IN1 6
-#define RM_IN2 22
-#define RM_PWM 13
-#define LM_IN1 23
-#define LM_IN2 18
-#define LM_PWM 12
+#define RM_IN1 6      // ON BOARD 31
+#define RM_IN2 22     // ON BOARD 15
+#define RM_PWM 13     // ON BOARD 33
+
+#define LM_IN1 23     // ON BOARD 16
+#define LM_IN2 18     // ON BOARD 12 
+#define LM_PWM 12     // ON BOARD 32
+
 
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
