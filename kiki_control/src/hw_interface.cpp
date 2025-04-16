@@ -26,9 +26,6 @@
 namespace kiki_diffdrive
 {
 
-// GPIO::PWM p_rm(RM_PWM, 50);
-// GPIO::PWM p_lm(LM_PWM, 50);
-
 CallbackReturn KikiDiffDriveHardware::on_init(
   const hardware_interface::HardwareInfo & info)
 {
@@ -37,14 +34,6 @@ CallbackReturn KikiDiffDriveHardware::on_init(
     return CallbackReturn::ERROR;
   }
 
-  // const int RM_IN1 = 6; //ON BOARD 31
-  // const int RM_IN2 = 22; //ON BOARD 15
-  // const int RM_PWM = 13; // ON BOARD 33
-
-  // const int LM_IN1 = 23; // ON BOARD 16
-  // const int LM_IN2 = 18; // ON BOARD 12 
-  // const int LM_PWM = 12; // ON BOARD 32
-  // GPIO::cleanup();
   GPIO::setmode(GPIO::BCM);
 
   GPIO::setup(RM_IN1, GPIO::OUT, GPIO::LOW);
@@ -62,38 +51,12 @@ CallbackReturn KikiDiffDriveHardware::on_init(
   p_rm->start(0);
   p_lm->start(0);
 
-  // GPIO::setup(RM_PWM, GPIO::OUT, GPIO::LOW);
-  // GPIO::setup(LM_PWM, GPIO::OUT, GPIO::LOW);
-
-  // p_rm = GPIO::PWM(RM_PWM, 50);
-  // p_lm = GPIO::PWM(LM_PWM, 50);
-
-  // cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
-  // cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
-//   cfg_.loop_rate = std::stof(info_.hardware_parameters["loop_rate"]);
-//   cfg_.device = info_.hardware_parameters["device"];
-//   cfg_.baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
-//   cfg_.timeout_ms = std::stoi(info_.hardware_parameters["timeout_ms"]);
-//   cfg_.enc_counts_per_rev = std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
-//   if (info_.hardware_parameters.count("pid_p") > 0)
-//   {
-//     cfg_.pid_p = std::stoi(info_.hardware_parameters["pid_p"]);
-//     cfg_.pid_d = std::stoi(info_.hardware_parameters["pid_d"]);
-//     cfg_.pid_i = std::stoi(info_.hardware_parameters["pid_i"]);
-//     cfg_.pid_o = std::stoi(info_.hardware_parameters["pid_o"]);
-//   }
-//   else
-//   {
-//     RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "PID values not supplied, using defaults.");
-//   }
-  
 
   wheel_l_.setup(info_.hardware_parameters["left_wheel_name"]);
   wheel_r_.setup(info_.hardware_parameters["right_wheel_name"]);
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints)
   {
-    // DiffBotSystem has exactly two states and one command interface on each joint
     if (joint.command_interfaces.size() != 1)
     {
       RCLCPP_FATAL(
@@ -111,33 +74,6 @@ CallbackReturn KikiDiffDriveHardware::on_init(
         joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
       return CallbackReturn::ERROR;
     }
-
-    // if (joint.state_interfaces.size() != 2)
-    // {
-    //   RCLCPP_FATAL(
-    //     rclcpp::get_logger("KikiDiffDriveHardware"),
-    //     "Joint '%s' has %zu state interface. 2 expected.", joint.name.c_str(),
-    //     joint.state_interfaces.size());
-    //   return hardware_interface::CallbackReturn::ERROR;
-    // }
-
-    // if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION)
-    // {
-    //   RCLCPP_FATAL(
-    //     rclcpp::get_logger("KikiDiffDriveHardware"),
-    //     "Joint '%s' have '%s' as first state interface. '%s' expected.", joint.name.c_str(),
-    //     joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-    //   return hardware_interface::CallbackReturn::ERROR;
-    // }
-
-    // if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY)
-    // {
-    //   RCLCPP_FATAL(
-    //     rclcpp::get_logger("KikiDiffDriveHardware"),
-    //     "Joint '%s' have '%s' as second state interface. '%s' expected.", joint.name.c_str(),
-    //     joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
-    //   return hardware_interface::CallbackReturn::ERROR;
-    // }
   }
 
   return CallbackReturn::SUCCESS;
