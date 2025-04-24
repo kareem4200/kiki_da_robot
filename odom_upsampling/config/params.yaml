@@ -1,0 +1,6 @@
+odom_upsampler:
+  ros__parameters:
+    slow_topic: /scan_odom
+    fast_topic: /odom_upsampled
+    source_frequency: 4
+    target_frequency: 50
