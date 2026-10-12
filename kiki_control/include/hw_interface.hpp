@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef KIKI_DIFFDRIVE_HPP__DIFFBOT_SYSTEM_HPP_
-#define KIKI_DIFFDRIVE_HPP__DIFFBOT_SYSTEM_HPP_
+#ifndef KIKI_CONTROL__HW_INTERFACE_HPP_
+#define KIKI_CONTROL__HW_INTERFACE_HPP_
 
 #include <memory>
 #include <string>
@@ -29,7 +29,6 @@
 #include "rclcpp/time.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
-#include "visibility_control.h"
 
 #include <JetsonGPIO.h>
 
@@ -44,43 +43,33 @@
 #define LM_PWM 12     // ON BOARD 32
 
 
-using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
-
 namespace kiki_diffdrive
 {
 class KikiDiffDriveHardware : public hardware_interface::SystemInterface
 {
 
-
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(KikiDiffDriveHardware);
 
-  KIKI_DIFFDRIVE_PUBLIC
   CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
-  KIKI_DIFFDRIVE_PUBLIC
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
+  hardware_interface::CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  CallbackReturn on_cleanup(const rclcpp_lifecycle::State & previous_state) override;
+  hardware_interface::CallbackReturn on_cleanup(const rclcpp_lifecycle::State & previous_state) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
+  hardware_interface::CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
+  hardware_interface::CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  hardware_interface::return_type read() override;
+  hardware_interface::return_type read(
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
-  KIKI_DIFFDRIVE_PUBLIC
-  hardware_interface::return_type write() override;
+  hardware_interface::return_type write(
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 private:
 
@@ -94,4 +83,4 @@ private:
 
 }  // namespace kiki_diffdrive
 
-#endif  // KIKI_DIFFDRIVE_HPP__DIFFBOT_SYSTEM_HPP_
+#endif  // KIKI_CONTROL__HW_INTERFACE_HPP_

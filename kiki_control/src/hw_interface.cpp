@@ -26,12 +26,12 @@
 namespace kiki_diffdrive
 {
 
-CallbackReturn KikiDiffDriveHardware::on_init(
+hardware_interface::CallbackReturn KikiDiffDriveHardware::on_init(
   const hardware_interface::HardwareInfo & info)
 {
-  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
+  if (hardware_interface::SystemInterface::on_init(info) != hardware_interface::CallbackReturn::SUCCESS)
   {
-    return CallbackReturn::ERROR;
+    return hardware_interface::CallbackReturn::ERROR;
   }
 
   GPIO::setmode(GPIO::BCM);
@@ -63,7 +63,7 @@ CallbackReturn KikiDiffDriveHardware::on_init(
         rclcpp::get_logger("KikiDiffDriveHardware"),
         "Joint '%s' has %zu command interfaces found. 1 expected.", joint.name.c_str(),
         joint.command_interfaces.size());
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
 
     if (joint.command_interfaces[0].name != hardware_interface::HW_IF_VELOCITY)
@@ -72,11 +72,11 @@ CallbackReturn KikiDiffDriveHardware::on_init(
         rclcpp::get_logger("KikiDiffDriveHardware"),
         "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
         joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
   }
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
 std::vector<hardware_interface::StateInterface> KikiDiffDriveHardware::export_state_interfaces()
@@ -109,17 +109,17 @@ std::vector<hardware_interface::CommandInterface> KikiDiffDriveHardware::export_
   return command_interfaces;
 }
 
-CallbackReturn KikiDiffDriveHardware::on_configure(
+hardware_interface::CallbackReturn KikiDiffDriveHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Configuring ...please wait...");
 
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Successfully configured!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-CallbackReturn KikiDiffDriveHardware::on_cleanup(
+hardware_interface::CallbackReturn KikiDiffDriveHardware::on_cleanup(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Cleaning up ...please wait...");
@@ -137,36 +137,38 @@ CallbackReturn KikiDiffDriveHardware::on_cleanup(
 
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Successfully cleaned up!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
 
-CallbackReturn KikiDiffDriveHardware::on_activate(
+hardware_interface::CallbackReturn KikiDiffDriveHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Activating ...please wait...");
 
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Successfully activated!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-CallbackReturn KikiDiffDriveHardware::on_deactivate(
+hardware_interface::CallbackReturn KikiDiffDriveHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Deactivating ...please wait...");
 
   RCLCPP_INFO(rclcpp::get_logger("KikiDiffDriveHardware"), "Successfully deactivated!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type KikiDiffDriveHardware::read()
+hardware_interface::return_type KikiDiffDriveHardware::read(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type KikiDiffDriveHardware::write()
+hardware_interface::return_type KikiDiffDriveHardware::write(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
 
   // if(wheel_l_.cmd > 0 && wheel_r_.cmd > 0)
